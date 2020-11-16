@@ -1,0 +1,7 @@
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\bin\Debug\net5.0\Identity.Application.dll
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\bin\Debug\net5.0\Identity.Data.dll
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\bin\Debug\net5.0\Identity.Domain.dll
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\obj\Debug\net5.0\Identity.IoC.csprojAssemblyReference.cache
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\obj\Debug\net5.0\Identity.IoC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\obj\Debug\net5.0\Identity.IoC.AssemblyInfoInputs.cache
+C:\Users\rafael.monteiro\Rafael\Pessoal\Projetos\Labs\Practices.Identity\Identity.IoC\obj\Debug\net5.0\Identity.IoC.AssemblyInfo.cs
