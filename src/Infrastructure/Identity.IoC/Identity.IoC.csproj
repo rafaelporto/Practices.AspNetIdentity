@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Services\Identity.Application\Identity.Application.csproj" />
-    <ProjectReference Include="..\src\Services\Identity.Data\Identity.Data.csproj" />
-    <ProjectReference Include="..\src\Services\Identity.Domain\Identity.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\Identity.Application\Identity.Application.csproj" />
+    <ProjectReference Include="..\..\Services\Identity.Data\Identity.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Identity.Domain\Identity.Domain.csproj" />
   </ItemGroup>
 
 </Project>
