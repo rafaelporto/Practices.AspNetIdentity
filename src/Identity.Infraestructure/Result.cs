@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Identity.Core
+namespace Identity.Infraestructure
 {
 	public readonly struct Result<T>
 	{

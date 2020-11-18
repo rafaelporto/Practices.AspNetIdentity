@@ -1,4 +1,5 @@
-using Identity.IoC;
+using AutoMapper;
+using Identity.Infraestructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace Identity.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.ConfigureServices()
+					.AddAutoMapper(typeof(Startup))
 					.AddControllers();
 			services.AddSwaggerGen(c =>
 			{

@@ -1,9 +1,8 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Identity.Api.Models
+namespace Identity.Api.AuthEndpoints
 {
-    public class RegisterUserDto
+    public class RegisterUserRequest
     {
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [EmailAddress(ErrorMessage = "O campo {0} está em formato inválido")]
