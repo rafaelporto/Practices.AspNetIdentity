@@ -3,10 +3,28 @@ using System.Linq;
 
 namespace Identity.Infraestructure
 {
+	public readonly struct Result
+	{
+		public bool IsSuccess => IsFailure is false;
+		public bool IsFailure => Errors?.Any() is true;
+		public IReadOnlyList<string> Errors { get; init; }
+
+		private Result(IEnumerable<string> errors = null) =>
+			Errors = errors?.ToList() ?? default;
+
+		public static Result Success() => new Result();
+		public static Result Failure(IEnumerable<string> errors) => new Result(errors);
+		public static Result Failure(string error) => new Result(new string[] { error });
+
+		public static Result<T> Success<T>(T value) => Result<T>.Ok(value);
+		public static Result<T> Failure<T>(IEnumerable<string> errors) => Result<T>.Fail(errors);
+		public static Result<T> Failure<T>(string error) => Result<T>.Fail(error);
+	}
+
 	public readonly struct Result<T>
 	{
-		public bool IsSuccess => true;
-		public bool IsFailure => !IsSuccess;
+		public bool IsSuccess => !IsFailure;
+		public bool IsFailure => Errors?.Any() is false;
 		public T Value { get; init; }
 		public IReadOnlyList<string> Errors { get; init; }
 

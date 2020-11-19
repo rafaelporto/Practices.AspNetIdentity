@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Swagger API",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "watch",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/Identity.Api/bin/Debug/net5.0/Identity.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Identity.Api",
@@ -19,9 +19,6 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
             }
         },
         {

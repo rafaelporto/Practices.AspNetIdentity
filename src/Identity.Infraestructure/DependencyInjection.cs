@@ -15,7 +15,7 @@ namespace Identity.Infraestructure
 			services.AddDbContext<UserContext>()
 					.AddEntityFrameworkInMemoryDatabase();
 
-			services.Configure<IdentityOptions>(options =>
+			services.AddIdentity<User, IdentityRole>(options => 
 			{
 				// Password settings.
 				options.Password.RequireDigit = true;
@@ -34,9 +34,8 @@ namespace Identity.Infraestructure
 				options.User.AllowedUserNameCharacters =
 				"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 				options.User.RequireUniqueEmail = false;
-			});
 
-			services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>();
+			}).AddEntityFrameworkStores<UserContext>();
 
 			services.AddScoped<IAuthService, AuthService>();
 

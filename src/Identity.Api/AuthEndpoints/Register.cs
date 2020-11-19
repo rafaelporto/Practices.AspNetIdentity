@@ -15,7 +15,7 @@ namespace Identity.Api.AuthEndpoints
 		public Register(IAuthService authService, IMapper mapper) => 
 			(_authService, _mapper) = (authService, mapper);
 
-		[HttpPost("api/register")]
+		[HttpPost("register")]
 		[SwaggerOperation(
 			Summary = "Register a user",
 			Description = "Register a user",
@@ -24,9 +24,12 @@ namespace Identity.Api.AuthEndpoints
 		]
 		public override ActionResult<RegisterUserResponse> Handle(RegisterUserRequest request)
 		{
-			var result = _authService.Register(_mapper.Map<User>(request), request.Password).Result;
+			if (request is null)
+				return BadRequest(new RegisterUserResponse("Objeto não válido."));
 
-			return Ok(new RegisterUserResponse { IsSuccess = result.IsSuccess });
+			var result = _authService.Register(_mapper.Map<User>(request), request.Password, request.ConfirmPassword).Result;
+
+			return Ok(new RegisterUserResponse(result.Errors));
 		}
 	}
 }
