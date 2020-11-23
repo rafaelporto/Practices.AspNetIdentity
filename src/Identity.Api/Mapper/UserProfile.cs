@@ -7,7 +7,7 @@ namespace Identity.Api.Mapper
 	public class UserProfile : Profile
 	{
 		public UserProfile() =>
-			CreateMap<RegisterUserRequest, User>()
-			.ConstructUsing(input => User.NewUser(input.Name, input.LastName, input.Email));
+			CreateMap<RegisterUserRequest, ApplicationUser>()
+			.ConstructUsing(input => ApplicationUser.NewUser(input.Name, input.LastName, input.Email));
 	}
 }

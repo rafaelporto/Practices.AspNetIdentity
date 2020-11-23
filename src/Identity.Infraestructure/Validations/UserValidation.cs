@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Identity.Infraestructure.Entities;
 
-namespace Identity.Infraestructure.Identity
+namespace Identity.Infraestructure.Validations
 {
-	public class UserValidation : AbstractValidator<User>
+	public class UserValidation : AbstractValidator<ApplicationUser>
 	{
 		public UserValidation()
 		{

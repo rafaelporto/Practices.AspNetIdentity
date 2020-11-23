@@ -27,7 +27,7 @@ namespace Identity.Api.AuthEndpoints
 			if (request is null)
 				return BadRequest(new RegisterUserResponse("Objeto não válido."));
 
-			var result = _authService.Register(_mapper.Map<User>(request), request.Password, request.ConfirmPassword).Result;
+			var result = _authService.Register(_mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword).Result;
 
 			return Ok(new RegisterUserResponse(result.Errors));
 		}

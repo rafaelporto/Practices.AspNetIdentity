@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Identity.Api.AuthEndpoints
 {
-	public record RegisterUserResponse
+	public readonly struct RegisterUserResponse
 	{
-		public bool IsSuccess => Errors?.Any() == false;
-		public IReadOnlyCollection<string> Errors { get; set; }
+		public bool IsSuccess => Errors is null || !Errors.Any();
+		public IReadOnlyCollection<string> Errors { get; }
 
 		public RegisterUserResponse(IEnumerable<string> errors) =>
-			Errors = errors.ToArray();
+			Errors = errors?.ToArray();
 
 		public RegisterUserResponse(string error) =>
 			Errors = new string[] { error };

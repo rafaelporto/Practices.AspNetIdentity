@@ -24,7 +24,7 @@ namespace Identity.Infraestructure
 	public readonly struct Result<T>
 	{
 		public bool IsSuccess => !IsFailure;
-		public bool IsFailure => Errors?.Any() is false;
+		public bool IsFailure => Errors is not null && Errors.Any();
 		public T Value { get; init; }
 		public IReadOnlyList<string> Errors { get; init; }
 

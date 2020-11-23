@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Identity.Api.AuthEndpoints
 {
     public class RegisterUserRequest

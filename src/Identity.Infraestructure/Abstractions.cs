@@ -1,36 +1,35 @@
 ﻿using System;
-using AutoMapper;
 using Identity.Infraestructure.Entities;
+using Identity.Infraestructure.Jwt;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Infraestructure
 {
-	public static class DependencyInjection
+    public static class Abstractions
 	{
-		public static IServiceCollection ConfigureServices(this IServiceCollection services)
+		public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
 		{
+			services.Configure<AppJwtSettings>(configuration.GetSection(AppJwtSettings.CONFIG_NAME));
+
 			services.AddDbContext<UserContext>()
 					.AddEntityFrameworkInMemoryDatabase();
 
-			services.AddIdentity<User, IdentityRole>(options => 
+			services.AddIdentity<ApplicationUser, ApplicationRole>(options => 
 			{
-				// Password settings.
-				options.Password.RequireDigit = true;
-				options.Password.RequireLowercase = true;
-				options.Password.RequireNonAlphanumeric = true;
-				options.Password.RequireUppercase = true;
+				options.Password.RequireDigit = false;
+				options.Password.RequireLowercase = false;
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireUppercase = false;
 				options.Password.RequiredLength = 6;
 				options.Password.RequiredUniqueChars = 1;
 
-				// Lockout settings.
 				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 				options.Lockout.MaxFailedAccessAttempts = 5;
 				options.Lockout.AllowedForNewUsers = true;
 
-				// User settings.
 				options.User.AllowedUserNameCharacters =
 				"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 				options.User.RequireUniqueEmail = false;
@@ -44,7 +43,10 @@ namespace Identity.Infraestructure
 
 		public static IApplicationBuilder UseIdentity(this IApplicationBuilder app)
 		{
-			return app;
+			if (app is null) throw new ArgumentException($"{nameof(app)} is required for configure identity middleware.");
+
+			return app.UseAuthentication()
+					  .UseAuthorization();
 		}
 	}
 }

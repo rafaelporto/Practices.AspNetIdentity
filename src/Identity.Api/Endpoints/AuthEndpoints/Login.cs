@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Identity.Api.AuthEndpoints
 {
-	public class Login : BaseEndpoint<LoginRequest, LoginResponse>
+	public class Login : BaseEndpoint<LoginRequest, ILoginResponse>
 	{
 		public readonly IAuthService _authService;
 
@@ -20,11 +20,16 @@ namespace Identity.Api.AuthEndpoints
 			OperationId = "auth.login",
 			Tags = new[] { "AuthEndpoints" })
 		]
-		public override ActionResult<LoginResponse> Handle(LoginRequest request)
+		[ProducesResponseType(typeof(LoginResponse), 200)]
+		[ProducesResponseType(typeof(LoginBadResponse), 404)]
+		public override ActionResult<ILoginResponse> Handle(LoginRequest request)
 		{
 			var result = _authService.Login(request.Email, request.Password).Result;
 
-			return Ok(new LoginResponse { IsSuccess = result.IsSuccess });
+            if (result.IsSuccess)
+				return Ok(new LoginResponse(result.Value));
+
+			return BadRequest(new LoginBadResponse(result.Errors));
 		}
 	}
 }
