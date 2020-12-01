@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Identity.Infraestructure.Services
 {
-	public class AuthService : IAuthService
+	internal class AuthService : IAuthService
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly SignInManager<ApplicationUser> _signInManager;
@@ -42,23 +42,6 @@ namespace Identity.Infraestructure.Services
 
 			return Result.Failure<UserResponse>("Não foi possível fazer o login");
 		}
-
-		public async Task<Result> Register(ApplicationUser newUser, string password, string confirmPassword)
-		{
-			if (password != confirmPassword)
-				return Result.Failure("The password does not match.");
-
-			if (newUser.IsInvalid)
-				return Result.Failure(newUser.Notifications);
-
-			var result = await _userManager.CreateAsync(newUser, password);
-
-			if (result.Succeeded)
-				return Result.Success();
-
-			return Result.Failure(result.Errors.Select(s => s.Description));
-		}
-
 		//TODO: Implementar método de confirmação de conta
 	}
 }

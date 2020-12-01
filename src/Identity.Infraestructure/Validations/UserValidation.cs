@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Linq;
+using FluentValidation;
 using Identity.Infraestructure.Entities;
 
 namespace Identity.Infraestructure.Validations
@@ -8,9 +9,24 @@ namespace Identity.Infraestructure.Validations
 		public UserValidation()
 		{
 			RuleFor(p => p.Email).EmailAddress();
-			RuleFor(p => p.Name)
+			RuleFor(p => p.FirstName)
 				.Cascade(CascadeMode.Stop)
-				.NotNull().NotEmpty();
+				.NotNull()
+				.NotEmpty()
+				.MinimumLength(3)
+				.MaximumLength(20)
+				.Must(NotContainsSpecialCaracters).WithMessage("{PropertyName} must not have any special character.");
+
+			RuleFor(p => p.LastName)
+				.Cascade(CascadeMode.Stop)
+				.NotNull()
+				.NotEmpty()
+				.MinimumLength(3)
+				.MaximumLength(50)
+				.Must(NotContainsSpecialCaracters).WithMessage("{PropertyName} must not have any special character.");
 		}
+
+		private bool NotContainsSpecialCaracters(string value) =>
+			!value.Any(s => char.IsLetterOrDigit(s));
 	}
 }

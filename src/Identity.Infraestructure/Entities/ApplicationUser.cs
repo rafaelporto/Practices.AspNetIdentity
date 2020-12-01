@@ -11,16 +11,17 @@ namespace Identity.Infraestructure.Entities
 	{
 		protected ApplicationUser() { }
 
-		public static ApplicationUser NewUser(string name, string lastName, string email) =>
+		public static ApplicationUser NewUser(string firstName, string lastName, string email, string phoneNumber) =>
 			new ApplicationUser
 			{
-				Name = name,
+				FirstName = firstName,
 				LastName = lastName,
 				Email = email,
-				UserName = email
+				UserName = email,
+				PhoneNumber = phoneNumber
 			};
 
-		public string Name { get; init; }
+		public string FirstName { get; init; }
 		public string LastName { get; init; }
 		public IReadOnlyList<string> Notifications => Validations?.Errors?.Select(p => p.ErrorMessage).ToList();
 		private ValidationResult Validations => new UserValidation().Validate(this);

@@ -3,6 +3,7 @@ using Identity.Infraestructure.Entities;
 using Identity.Infraestructure.Jwt;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,6 +38,7 @@ namespace Identity.Infraestructure
 			}).AddEntityFrameworkStores<UserContext>();
 
 			services.AddScoped<IAuthService, AuthService>();
+			services.AddScoped<IUserService, UserService>();
 
 			return services;
 		}

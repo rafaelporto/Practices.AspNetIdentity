@@ -54,6 +54,7 @@ namespace Identity.Api
 					  Array.Empty<string>()
 				   }
 				});
+				c.EnableAnnotations();
 			});
 		}
 

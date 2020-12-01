@@ -5,29 +5,29 @@ using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Identity.Api.AuthEndpoints
+namespace Identity.Api.UserEndpoints
 {
 	public class Register : BaseEndpoint<RegisterUserRequest, RegisterUserResponse>
 	{
-		private IAuthService _authService;
+		private IUserService _userService;
 		private IMapper _mapper;
 
-		public Register(IAuthService authService, IMapper mapper) => 
-			(_authService, _mapper) = (authService, mapper);
+		public Register(IUserService userService, IMapper mapper) => 
+			(_userService, _mapper) = (userService, mapper);
 
 		[HttpPost("register")]
 		[SwaggerOperation(
 			Summary = "Register a user",
-			Description = "Register a user",
+			Description = "This endpoint is for a new user register yourself",
 			OperationId = "auth.register",
-			Tags = new[] { "AuthEndpoints" })
+			Tags = new[] { "UserEndpoints" })
 		]
 		public override ActionResult<RegisterUserResponse> Handle(RegisterUserRequest request)
 		{
 			if (request is null)
 				return BadRequest(new RegisterUserResponse("Objeto não válido."));
 
-			var result = _authService.Register(_mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword).Result;
+			var result = _userService.Register(_mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword).Result;
 
 			return Ok(new RegisterUserResponse(result.Errors));
 		}

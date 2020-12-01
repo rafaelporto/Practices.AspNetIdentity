@@ -8,6 +8,10 @@ namespace Identity.Api.Mapper
 	{
 		public UserProfile() =>
 			CreateMap<RegisterUserRequest, ApplicationUser>()
-			.ConstructUsing(input => ApplicationUser.NewUser(input.Name, input.LastName, input.Email));
+			.ConstructUsing(input => 
+				ApplicationUser.NewUser(input.FirstName, 
+										input.LastName, 
+										input.Email, 
+										input.Phonenumber));
 	}
 }
