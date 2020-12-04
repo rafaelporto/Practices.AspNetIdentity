@@ -4,32 +4,39 @@ using Identity.Infraestructure.Entities;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using CSharpFunctionalExtensions;
+using System.Collections.Generic;
+using Identity.Api.Endpoints;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Identity.Api.UserEndpoints
 {
-	public class Register : BaseEndpoint<RegisterUserRequest, RegisterUserResponse>
+	[Produces("application/json")]
+	public class Register : BaseAsyncEndpoint
 	{
-		private IUserService _userService;
-		private IMapper _mapper;
-
-		public Register(IUserService userService, IMapper mapper) => 
-			(_userService, _mapper) = (userService, mapper);
-
 		[HttpPost("register")]
+		[ProducesResponseType(typeof(RegisterUserOkResponse), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(RegisterUserBadResponse), (int)HttpStatusCode.BadRequest)]
 		[SwaggerOperation(
 			Summary = "Register a user",
 			Description = "This endpoint is for a new user register yourself",
 			OperationId = "auth.register",
 			Tags = new[] { "UserEndpoints" })
 		]
-		public override ActionResult<RegisterUserResponse> Handle(RegisterUserRequest request)
+		public async Task<ActionResult<IResponse>> HandleAsync(RegisterUserRequest request,
+			[FromServices] IUserService userService, [FromServices] IMapper mapper)
 		{
 			if (request is null)
-				return BadRequest(new RegisterUserResponse("Objeto não válido."));
+				return BadRequest(new RegisterUserBadResponse("Bad parameters request."));
 
-			var result = _userService.Register(_mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword).Result;
-
-			return Ok(new RegisterUserResponse(result.Errors));
+			return await userService.Register(mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword)
+									 .Finally(MapResult);
 		}
+
+		private ActionResult<IResponse> MapResult(Result<ApplicationUser, IEnumerable<string>> result) =>
+			 result.IsSuccess ?
+				Ok(new RegisterUserOkResponse()) :
+				BadRequest(new RegisterUserBadResponse(result.Error));
 	}
 }

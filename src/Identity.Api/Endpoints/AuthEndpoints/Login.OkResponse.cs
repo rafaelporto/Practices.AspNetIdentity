@@ -1,11 +1,12 @@
-﻿using Identity.Infraestructure.Jwt.Model;
+﻿using Identity.Api.Endpoints;
+using Identity.Infraestructure.Jwt.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Identity.Api.AuthEndpoints
 {
-	public readonly struct LoginResponse : ILoginResponse
+	public readonly struct LoginOkResponse : IResponse
 	{
 		public bool IsSuccess => true;
 		public string AccessToken { get; }
@@ -14,7 +15,7 @@ namespace Identity.Api.AuthEndpoints
 		public string Email { get; }
 		public IReadOnlyCollection<UserClaim> Claims { get; }
 
-		public LoginResponse(UserResponse userResponse)
+		public LoginOkResponse(UserResponse userResponse)
         {
             AccessToken = userResponse.AccessToken;
 			ExpiresIn = userResponse.ExpiresIn;

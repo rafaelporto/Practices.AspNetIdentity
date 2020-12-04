@@ -1,19 +1,17 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
+using Identity.Api.Endpoints;
+using Identity.Infraestructure.Entities;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Identity.Api.UserEndpoints
 {
-	public class Create : BaseEndpoint<CreateRequest, ICreateResponse>
+	[Produces("application/json")]
+	public class Create : BaseAsyncEndpoint
 	{
-		private IUserService _userService;
-		private IMapper _mapper;
-
-		public Create(IUserService userService, IMapper mapper) =>
-			(_userService, _mapper) = (userService, mapper);
-
 		[HttpPost("users")]
 		[SwaggerOperation(
 			Summary = "Create a user",
@@ -21,9 +19,11 @@ namespace Identity.Api.UserEndpoints
 			OperationId = "users.create",
 			Tags = new[] { "UserEndpoints" })
 		]
-		public override ActionResult<ICreateResponse> Handle(CreateRequest request)
+
+		public async Task<ActionResult<IResponse>> HandleAsync([FromBody] CreateRequest request,
+			[FromServices] IUserService userService, [FromServices] IMapper mapper)
 		{
-			var result = _userService.CreateUser();
+			var result = await userService.CreateUser(mapper.Map<ApplicationUser>(request), request.Password, request.ConfirmPassword);
 
 			return Ok();
 		}

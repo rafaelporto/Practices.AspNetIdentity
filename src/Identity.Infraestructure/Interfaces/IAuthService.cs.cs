@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 using Identity.Infraestructure.Jwt.Model;
 
 namespace Identity.Infraestructure.Services
 {
 	public interface IAuthService
     {
-        Task<Result<UserResponse>> Login(string email, string password);
+        Task<Result<UserResponse, IEnumerable<string>>> Login(string email, string password);
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 using Identity.Infraestructure.Entities;
 using Identity.Infraestructure.Jwt;
 using Identity.Infraestructure.Jwt.Model;
@@ -24,23 +24,23 @@ namespace Identity.Infraestructure.Services
 									.WithJwtSettings(jwtSettings.Value);
 		}
 
-		public async Task<Result<UserResponse>> Login(string email, string password)
+		public async Task<Result<UserResponse, IEnumerable<string>>> Login(string email, string password)
 		{
 			if (email is null or "")
-				return Result.Failure<UserResponse>("O nome do usuário é obrigatório");
+				return Result.Failure<UserResponse, IEnumerable<string>>(new string[] { "O nome do usuário é obrigatório"});
 			
 			if (password is null or "")
-				return Result.Failure<UserResponse>("O password do usuário é obrigatório");
+				return Result.Failure<UserResponse, IEnumerable<string>>(new string[] { "O password do usuário é obrigatório" });
 
 			var result = await _signInManager.PasswordSignInAsync(email, password, false, true);
 
 			if (result.Succeeded)
 			{
 				var userResponse = _jwtBuilder.WithEmail(email).WithJwtClaims().WithUserClaims().BuildUserResponse();
-				return Result.Success(userResponse);
+				return Result.Success<UserResponse, IEnumerable<string>>(userResponse);
 			}
 
-			return Result.Failure<UserResponse>("Não foi possível fazer o login");
+			return Result.Failure<UserResponse, IEnumerable<string>>(new string[] { "Não foi possível fazer o login" });
 		}
 		//TODO: Implementar método de confirmação de conta
 	}

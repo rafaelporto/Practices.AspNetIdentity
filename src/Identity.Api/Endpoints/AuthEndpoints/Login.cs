@@ -1,18 +1,19 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
+using CSharpFunctionalExtensions;
+using Identity.Api.Endpoints;
+using Identity.Infraestructure.Jwt.Model;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Identity.Api.AuthEndpoints
 {
-	public class Login : BaseEndpoint<LoginRequest, ILoginResponse>
+	[Produces("application/json")]
+	public class Login : BaseAsyncEndpoint
 	{
-		public readonly IAuthService _authService;
-
-		public Login(IAuthService authService) =>
-			_authService = authService;
-
-
 		[HttpPost("login")]
 		[SwaggerOperation(
 			Summary = "Login",
@@ -20,16 +21,18 @@ namespace Identity.Api.AuthEndpoints
 			OperationId = "auth.login",
 			Tags = new[] { "AuthEndpoints" })
 		]
-		[ProducesResponseType(typeof(LoginResponse), 200)]
-		[ProducesResponseType(typeof(LoginBadResponse), 404)]
-		public override ActionResult<ILoginResponse> Handle(LoginRequest request)
+		[ProducesResponseType(typeof(LoginOkResponse), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(LoginBadResponse), (int)HttpStatusCode.BadRequest)]
+		public async Task<ActionResult<IResponse>> HandleAsync(LoginRequest request,
+			[FromServices] IAuthService authService)
 		{
-			var result = _authService.Login(request.Email, request.Password).Result;
-
-            if (result.IsSuccess)
-				return Ok(new LoginResponse(result.Value));
-
-			return BadRequest(new LoginBadResponse(result.Errors));
+			return await authService.Login(request.Email, request.Password)
+									.Finally(MapResult);
 		}
+
+		private ActionResult<IResponse> MapResult(Result<UserResponse, IEnumerable<string>> result) =>
+			result.IsSuccess ?
+				Ok(new LoginOkResponse(result.Value)) :
+				BadRequest(new LoginBadResponse(result.Error));
 	}
 }

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Identity.Api.Endpoints;
 
 namespace Identity.Api.UserEndpoints
 {
-	public readonly struct RegisterUserResponse
+	public readonly struct RegisterUserBadResponse : IResponse
 	{
 		public bool IsSuccess => Errors is null || !Errors.Any();
 		public IReadOnlyCollection<string> Errors { get; }
 
-		public RegisterUserResponse(IEnumerable<string> errors) =>
+		public RegisterUserBadResponse(IEnumerable<string> errors = default) =>
 			Errors = errors?.ToArray();
 
-		public RegisterUserResponse(string error) =>
+		public RegisterUserBadResponse(string error = default) =>
 			Errors = new string[] { error };
 	}
 }
