@@ -15,12 +15,7 @@ namespace Identity.Api.Mapper
 										input.Email, 
 										input.Phonenumber));
 
-			CreateMap<CreateRequest, ApplicationUser>()
-			.ConstructUsing(input =>
-				ApplicationUser.NewUser(input.FirstName,
-										input.LastName,
-										input.Email,
-										input.Phonenumber));
+			CreateMap<ApplicationUser, UserDto>();
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Identity.Infraestructure.Entities;
 using Identity.Infraestructure.Jwt;
-using Identity.Infraestructure.Services;
+using Identity.Infraestructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +42,7 @@ namespace Identity.Infraestructure
 
 			services.AddScoped<IAuthService, AuthService>();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IUserRepository, UserRepository>();
 
 			return services;
 		}

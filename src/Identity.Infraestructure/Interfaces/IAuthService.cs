@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using Identity.Infraestructure.Jwt.Model;
 
-namespace Identity.Infraestructure.Services
+namespace Identity.Infraestructure
 {
 	public interface IAuthService
     {

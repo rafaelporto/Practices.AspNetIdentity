@@ -7,7 +7,7 @@ using Identity.Infraestructure.Jwt.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Identity.Infraestructure.Services
+namespace Identity.Infraestructure
 {
 	internal class AuthService : IAuthService
 	{

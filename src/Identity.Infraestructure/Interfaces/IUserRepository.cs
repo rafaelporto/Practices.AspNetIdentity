@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using Identity.Infraestructure.Entities;
 
 namespace Identity.Infraestructure
 {
-	public interface IUserService
+	public interface IUserRepository
 	{
-		Task<Result<ApplicationUser, IEnumerable<string>>> Register(ApplicationUser newUser, string password, string confirmedPassword);
+		Task<Maybe<IEnumerable<ApplicationUser>>> GetUsers(CancellationToken cancellationToken = default);
 	}
 }

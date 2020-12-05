@@ -9,8 +9,6 @@ namespace Identity.Infraestructure.Entities
 {
     public class ApplicationUser : IdentityUser<Guid>
 	{
-		protected ApplicationUser() { }
-
 		public static ApplicationUser NewUser(string firstName, string lastName, string email, string phoneNumber) =>
 			new ApplicationUser
 			{

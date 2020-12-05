@@ -27,6 +27,6 @@ namespace Identity.Infraestructure.Validations
 		}
 
 		private bool NotContainsSpecialCaracters(string value) =>
-			!value.Any(s => !char.IsLetterOrDigit(s));
+			!value.Any(s => !char.IsLetterOrDigit(s) && !char.IsWhiteSpace(s));
 	}
 }

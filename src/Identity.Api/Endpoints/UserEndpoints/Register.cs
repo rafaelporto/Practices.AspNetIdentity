@@ -1,11 +1,10 @@
 ﻿using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Identity.Infraestructure.Entities;
-using Identity.Infraestructure.Services;
+using Identity.Infraestructure;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using CSharpFunctionalExtensions;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -14,13 +13,13 @@ namespace Identity.Api.UserEndpoints
 	[Produces("application/json")]
 	public class Register : BaseAsyncEndpoint
 	{
-		[HttpPost("register")]
+		[HttpPost("user")]
 		[ProducesResponseType(typeof(RegisterUserResponse), (int)HttpStatusCode.OK)]
 		[ProducesResponseType(typeof(RegisterUserResponse), (int)HttpStatusCode.BadRequest)]
 		[SwaggerOperation(
 			Summary = "Register a user",
 			Description = "This endpoint is for a new user register yourself",
-			OperationId = "auth.register",
+			OperationId = "user.register",
 			Tags = new[] { "UserEndpoints" })
 		]
 		public async Task<IActionResult> HandleAsync(RegisterUserRequest request,
