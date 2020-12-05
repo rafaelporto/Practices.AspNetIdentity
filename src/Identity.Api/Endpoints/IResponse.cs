@@ -1,7 +1,10 @@
-﻿namespace Identity.Api.Endpoints
+﻿using System.Collections.Generic;
+
+namespace Identity.Api.Endpoints
 {
-	public interface IResponse
+	internal interface IResponse
 	{
 		public bool IsSuccess { get; }
+		public IReadOnlyCollection<string> Notifications { get; }
 	}
 }

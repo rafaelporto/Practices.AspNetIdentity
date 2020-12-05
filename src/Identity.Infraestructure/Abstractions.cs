@@ -13,6 +13,9 @@ namespace Identity.Infraestructure
 	{
 		public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
 		{
+			if (services is null)
+				throw new ArgumentException($"{nameof(services)} is required for configure identity.");
+
 			services.Configure<AppJwtSettings>(configuration.GetSection(AppJwtSettings.CONFIG_NAME));
 
 			services.AddDbContext<UserContext>()
@@ -32,7 +35,7 @@ namespace Identity.Infraestructure
 				options.Lockout.AllowedForNewUsers = true;
 
 				options.User.AllowedUserNameCharacters =
-				"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+				"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@";
 				options.User.RequireUniqueEmail = false;
 
 			}).AddEntityFrameworkStores<UserContext>();
@@ -43,9 +46,10 @@ namespace Identity.Infraestructure
 			return services;
 		}
 
-		public static IApplicationBuilder UseIdentity(this IApplicationBuilder app)
+		public static IApplicationBuilder UseIdentityConfiguration(this IApplicationBuilder app)
 		{
-			if (app is null) throw new ArgumentException($"{nameof(app)} is required for configure identity middleware.");
+			if (app is null)
+				throw new ArgumentException($"{nameof(app)} is required for configure identity middleware.");
 
 			return app.UseAuthentication()
 					  .UseAuthorization();

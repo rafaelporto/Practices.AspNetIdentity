@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using CSharpFunctionalExtensions;
-using Identity.Api.Endpoints;
-using Identity.Infraestructure.Jwt.Model;
 using Identity.Infraestructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,18 +18,15 @@ namespace Identity.Api.AuthEndpoints
 			OperationId = "auth.login",
 			Tags = new[] { "AuthEndpoints" })
 		]
-		[ProducesResponseType(typeof(LoginOkResponse), (int)HttpStatusCode.OK)]
-		[ProducesResponseType(typeof(LoginBadResponse), (int)HttpStatusCode.BadRequest)]
-		public async Task<ActionResult<IResponse>> HandleAsync(LoginRequest request,
+		[ProducesResponseType(typeof(LoginResponse), (int)HttpStatusCode.OK)]
+		[ProducesResponseType(typeof(LoginResponse), (int)HttpStatusCode.BadRequest)]
+		public async Task<IActionResult> HandleAsync(LoginRequest request,
 			[FromServices] IAuthService authService)
 		{
 			return await authService.Login(request.Email, request.Password)
-									.Finally(MapResult);
+									.Finally(result => result.IsSuccess ?
+												LoginResponse.OkResponse(result.Value) :
+												LoginResponse.BadResponse(result.Error));
 		}
-
-		private ActionResult<IResponse> MapResult(Result<UserResponse, IEnumerable<string>> result) =>
-			result.IsSuccess ?
-				Ok(new LoginOkResponse(result.Value)) :
-				BadRequest(new LoginBadResponse(result.Error));
 	}
 }
