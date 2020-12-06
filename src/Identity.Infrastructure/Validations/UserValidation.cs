@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using FluentValidation;
-using Identity.Infraestructure.Entities;
+using Identity.Infrastructure.Entities;
 
-namespace Identity.Infraestructure.Validations
+namespace Identity.Infrastructure.Validations
 {
 	public class UserValidation : AbstractValidator<ApplicationUser>
 	{

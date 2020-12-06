@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure.Entities;
-using Identity.Infraestructure.Jwt;
-using Identity.Infraestructure.Jwt.Model;
+using Identity.Infrastructure.Entities;
+using Identity.Infrastructure.Jwt;
+using Identity.Infrastructure.Jwt.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	internal class AuthService : IAuthService
 	{

@@ -1,9 +1,9 @@
-﻿using Identity.Infraestructure.Entities;
+﻿using Identity.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	public class UserContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 	{

@@ -1,5 +1,5 @@
 ﻿using Identity.Api.Endpoints;
-using Identity.Infraestructure.Jwt.Model;
+using Identity.Infrastructure.Jwt.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

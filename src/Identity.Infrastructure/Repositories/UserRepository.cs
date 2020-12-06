@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure.Entities;
+using Identity.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	public class UserRepository : IUserRepository
 	{

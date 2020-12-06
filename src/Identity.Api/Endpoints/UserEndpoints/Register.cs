@@ -1,7 +1,7 @@
 ﻿using Ardalis.ApiEndpoints;
 using AutoMapper;
-using Identity.Infraestructure.Entities;
-using Identity.Infraestructure;
+using Identity.Infrastructure.Entities;
+using Identity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using CSharpFunctionalExtensions;

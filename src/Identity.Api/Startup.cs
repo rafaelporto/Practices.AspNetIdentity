@@ -1,8 +1,8 @@
 using AutoMapper;
 using FluentValidation;
 using Identity.Api.Configurations;
-using Identity.Infraestructure;
-using Identity.Infraestructure.Jwt;
+using Identity.Infrastructure;
+using Identity.Infrastructure.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

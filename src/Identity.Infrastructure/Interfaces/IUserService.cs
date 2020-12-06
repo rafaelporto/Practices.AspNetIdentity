@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure.Entities;
+using Identity.Infrastructure.Entities;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	public interface IUserService
 	{

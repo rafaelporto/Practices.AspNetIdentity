@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure.Entities;
+using Identity.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	internal class UserService : IUserService
 	{

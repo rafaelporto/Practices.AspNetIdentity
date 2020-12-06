@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
-using Identity.Infraestructure.Validations;
+using Identity.Infrastructure.Validations;
 using Microsoft.AspNetCore.Identity;
 
-namespace Identity.Infraestructure.Entities
+namespace Identity.Infrastructure.Entities
 {
     public class ApplicationUser : IdentityUser<Guid>
 	{

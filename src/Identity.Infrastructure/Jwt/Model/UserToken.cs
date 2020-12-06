@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Identity.Infraestructure.Jwt.Model
+namespace Identity.Infrastructure.Jwt.Model
 {
     public class UserToken
     {

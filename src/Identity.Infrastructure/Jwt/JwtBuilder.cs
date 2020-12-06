@@ -1,5 +1,5 @@
-﻿using Identity.Infraestructure.Entities;
-using Identity.Infraestructure.Jwt.Model;
+﻿using Identity.Infrastructure.Entities;
+using Identity.Infrastructure.Jwt.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace Identity.Infraestructure.Jwt
+namespace Identity.Infrastructure.Jwt
 {
     public class JwtBuilder
     {

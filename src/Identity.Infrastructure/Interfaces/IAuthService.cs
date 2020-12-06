@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure.Jwt.Model;
+using Identity.Infrastructure.Jwt.Model;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
 	public interface IAuthService
     {

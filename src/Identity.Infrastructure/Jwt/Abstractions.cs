@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 
-namespace Identity.Infraestructure.Jwt
+namespace Identity.Infrastructure.Jwt
 {
     public static class Abstractions
     {

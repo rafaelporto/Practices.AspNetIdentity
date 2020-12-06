@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using CSharpFunctionalExtensions;
-using Identity.Infraestructure;
+using Identity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

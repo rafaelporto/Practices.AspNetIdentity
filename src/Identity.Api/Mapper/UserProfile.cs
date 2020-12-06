@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Identity.Api.UserEndpoints;
-using Identity.Infraestructure.Entities;
+using Identity.Infrastructure.Entities;
 
 namespace Identity.Api.Mapper
 {

@@ -1,4 +1,4 @@
-﻿namespace Identity.Infraestructure.Jwt.Model
+﻿namespace Identity.Infrastructure.Jwt.Model
 {
     public class UserClaim
     {

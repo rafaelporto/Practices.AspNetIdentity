@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C18DA04F-62F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Identity.Api\Identity.Api.csproj", "{884651D0-5D1B-4A91-BD9F-ED087861BFF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Infraestructure", "src\Identity.Infraestructure\Identity.Infraestructure.csproj", "{7E14357F-14A8-4372-9F0A-A5A29382D7AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Infraestructure", "src\Identity.Infraestructure\Identity.Infraestructure.csproj", "{7E14357F-14A8-4372-9F0A-A5A29382D7AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soluction files", "Soluction files", "{6F168261-382C-4B53-8FD4-C49A5BAAD20F}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

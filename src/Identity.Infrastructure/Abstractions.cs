@@ -1,13 +1,13 @@
 ﻿using System;
-using Identity.Infraestructure.Entities;
-using Identity.Infraestructure.Jwt;
-using Identity.Infraestructure;
+using Identity.Infrastructure.Entities;
+using Identity.Infrastructure.Jwt;
+using Identity.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Identity.Infraestructure
+namespace Identity.Infrastructure
 {
     public static class Abstractions
 	{
